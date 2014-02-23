@@ -1,0 +1,91 @@
+<template name="register">
+	<form id="form_register" class="form-account" role="form">
+		<h2>Please sign up</h2>
+
+		{{#if errorMessage}}
+			<div class="alert alert-warning">{{errorMessage}}</div>
+		{{/if}}
+
+		<input id="register_name" type="text" class="form-control" placeholder="Your full name" required autofocus>
+		<input id="register_email" type="text" class="form-control" placeholder="Email address" required>
+		<input  id="register_password" type="password" class="form-control" placeholder="Password" required>
+
+		<button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="Please wait...">Sign up</button>
+		<p class="form-account-text-after">Already a member? <a href="{{pathFor 'login'}}">Sign in here</a></p>
+	</form>
+</template>
+
+
+<template name="login">
+	<form id="form_login" class="form-account" role="form">
+		<h2>Please sign in</h2>
+
+		{{#if errorMessage}}
+			<div class="alert alert-warning">{{errorMessage}}</div>
+		{{/if}}
+
+		<input id="login_email" type="text" class="form-control" placeholder="Email address" required autofocus>
+		<input id="login_password" type="password" class="form-control" placeholder="Password" required>
+
+		<label class="checkbox">
+			<input type="checkbox" value="remember-me"> Remember me
+		</label>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="Please wait...">Sign in</button>
+		<p class="form-account-text-after">Not a member? <a href="{{pathFor 'register'}}">Sign up here</a></p>
+		<p class="form-account-text-after">Forgot password? <a href="{{pathFor 'forgot_password'}}">Click here</a></p>
+	</form>
+</template>
+
+
+<template name="forgot_password">
+	{{#if resetPasswordSent}}
+		<div class="accounts-info-box">
+			<h2>Forgot password</h2>
+			<p>Password reset instructions are sent to your e-mail address.</p>
+			<a href="{{pathFor 'login'}}" class="btn btn-lg btn-primary" id="reset_password_sent">OK</a>
+		</div>
+	{{else}}
+		<form id="form_forgot_password" class="form-account" role="form">
+			<h2 class="form-account-heading">Forgot password</h2>
+
+			{{#if errorMessage}}
+				<div class="alert alert-warning">{{errorMessage}}</div>
+			{{/if}}
+
+			<input id="reset_email" type="text" class="form-control" placeholder="Email address" required autofocus>
+
+			<button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="Please wait...">Submit</button>
+		</form>
+	{{/if}}
+</template>
+
+<template name="reset_password">
+	<form id="form_reset_password" class="form-account" role="form">
+		<h2>Reset password</h2>
+
+		{{#if errorMessage}}
+			<div class="alert alert-warning">{{errorMessage}}</div>
+		{{/if}}
+
+		<input  id="new_password" type="password" class="form-control" placeholder="Your new password" required autofocus>
+		<input  id="new_password_confirm" type="password" class="form-control" placeholder="Confirm password" required>
+
+		<button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="Please wait...">Submit</button>
+	</form>
+</template>
+
+
+<template name="unverified">
+	<div class="accounts-info-box">
+		<h2>Welcome {{userFullName}}</h2>
+		<p>Your account is not activated yet. Please check your e-mail and click verification link.</p>
+	</div>
+</template>
+
+
+<template name="verify_email">
+	<div class="accounts-info-box">
+		<h2>E-mail verification</h2>
+		<p>{{errorMessage}}</p>
+	</div>
+</template>

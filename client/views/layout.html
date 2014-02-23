@@ -1,0 +1,80 @@
+<head><title>Login example</title></head>
+
+<body></body>
+
+<template name="layout">
+	<div id="wrap">
+		{{> main_menu}}
+
+		<div class="container">
+			{{yield}}
+		</div>
+	</div>
+
+	<div id="footer">
+		{{> footer}}
+	</div>
+</template>
+
+
+<template name="main_menu">
+	<div id="main_navbar" class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">{{siteName}}</a>
+			</div>
+
+			<div class="collapse navbar-collapse">
+					{{#if currentUser}}
+						{{> menu_private}}
+					{{else}}
+						{{> menu_public}}
+					{{/if}}
+			</div>
+
+		</div>
+	</div>
+</template>
+
+
+<template name="menu_public">
+	<ul class="nav navbar-nav">
+		<li class="{{menuItemClass 'home_public'}}"><a href="{{pathFor 'home_public'}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+	</ul>
+
+	<ul class="nav navbar-nav navbar-right">
+		<li class="{{menuItemClass 'register'}}"><a href="{{pathFor 'register'}}"> Sign up</a></li>
+		<li class="{{menuItemClass 'login'}}"><a href="{{pathFor 'login'}}"> Sign in</a></li>
+	</ul>
+</template>
+
+
+<template name="menu_private">
+	{{#if isUserVerified}}
+		<ul class="nav navbar-nav">
+			<li class="{{menuItemClass 'home_private'}}"><a href="{{pathFor 'home_private'}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+			<li class="{{menuItemClass 'help'}}"><a href="{{pathFor 'help'}}"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
+			<li class="{{menuItemClass 'logout'}}"><a href="{{pathFor 'logout'}}"> Logout</a></li>
+		</ul>
+	{{else}}
+		<ul class="nav navbar-nav navbar-right">
+			<li class="{{menuItemClass 'logout'}}"><a href="{{pathFor 'logout'}}"> Logout</a></li>
+		</ul>
+	{{/if}}
+</template>
+
+
+<template name="footer">
+	<div class="container">
+		<p class="text-muted">Footer here</p>
+	</div>
+</template>
